@@ -1,6 +1,6 @@
 # NNR implentation
 This project is an implementation of an NNR (Nearest Neighbor Rule) classifier. The classifier utilizes a JSON file for configuring the CSV sheets that contain the data. The JSON file should have the following format:
-```
+``` json
 {
   "data_file_train": "data/<enter csv name here>_train.csv",
   "data_file_validation": "data/<enter csv name here>_validation.csv",
