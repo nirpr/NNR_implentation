@@ -49,7 +49,7 @@ def predict(distances, class_array, radius):
     the function gets an npArray of distances, a class array and radius and returns a list of predicted classes.
     """
     num_instances = distances.shape[1]
-    predictions = np.full(num_instances, "", dtype=object)
+    predictions = []
 
     for test_ind in range(num_instances):
         test_distances = distances[:, test_ind]
@@ -62,9 +62,15 @@ def predict(distances, class_array, radius):
             most_frequent_classes = unique_classes[class_counts == max_count]
             predicted_class = np.random.choice(
                 most_frequent_classes)  # Choose randomly if multiple classes have the same count
-            predictions[test_ind] = predicted_class
+            predictions.append(predicted_class)
+        else:
+            unique_classes, class_counts = np.unique(class_array, return_counts=True)
+            max_count = np.max(class_counts)
+            most_frequent_classes = unique_classes[class_counts == max_count]
+            predicted_class = np.random.choice(most_frequent_classes)
+            predictions.append(predicted_class)
 
-    return predictions
+    return np.array(predictions)
 
 
 def classify_with_NNR(data_trn: str, data_vld: str, df_tst: DataFrame) -> List:
